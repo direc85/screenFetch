@@ -1597,6 +1597,8 @@ detectgpu () {
 			gpu_info="${gpu_info:1} "
 		fi
 		gpu="${gpu}"
+	elif [ -r /proc/fb ]; then
+		DetectIntelGPU
 	else
 		gpu="Not Found"
 	fi
@@ -6247,11 +6249,6 @@ for i in "${display[@]}"; do
 		fi
 	fi
 done
-
-if [ "$gpu" = 'Not Found' ] ; then
-	DetectIntelGPU
-fi
-
 
 infoDisplay
 [ "$screenshot" == "1" ] && takeShot
